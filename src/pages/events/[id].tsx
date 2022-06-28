@@ -39,7 +39,7 @@ const EventId: NextPage<EventsProps> = (props: EventsProps) => {
 
     return (
         <>
-            <h1>EventId</h1>
+            <h1>EventId: {id}</h1>
             
             <div key={id}>
                 <h2>{event_name}</h2>

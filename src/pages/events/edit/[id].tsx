@@ -38,7 +38,7 @@ const EditEventId: NextPage<EventsProps> = (props: EventsProps) => {
 
     return (
         <>
-            <h1>EditEventId {id}</h1>
+            <h1>EditEventId: {id}</h1>
         </>
     );
 };
