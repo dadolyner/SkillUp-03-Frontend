@@ -1,9 +1,10 @@
 import type { NextPage } from 'next';
+import LoginComponent from '../../components/Forms/login';
 
 const Login: NextPage = () => {
     return (
         <>
-            <h1>Login</h1>
+            <LoginComponent />
         </>
     );
 };
