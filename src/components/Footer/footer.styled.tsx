@@ -17,11 +17,17 @@ export const FooterContainer = styled.footer`
     background: ${White};
 
     @media screen and (max-width: 900px) {
-        font-size: 10px;
+        font-size: 8px;
     }
 `;
 
 export const Span = styled.span`
     font-size: 16px;
     color: ${Primary};
+
+    @media screen and (max-width: 900px) {
+        &.logo { display: none; }
+        font-size: 10px;
+        justify-content: center;
+    }
 `;

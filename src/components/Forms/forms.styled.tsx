@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Primary } from '../Colors/colors';
+import { Primary, Alternative } from '../Colors/colors';
 
 export const TitleContainer = styled.div`
     display: flex;
@@ -20,6 +20,7 @@ export const Container = styled.div`
     justify-content: center;
     width: 100%;
     height: 97vh;
+    background-color: ${Alternative};
 `;
 
 export const Avatar = styled.img`
@@ -59,7 +60,6 @@ export const Label = styled.label``;
 export const Input = styled.input`
     outline: 0;
     border: 0;
-    border: 1px solid ${Primary};
     padding: 5px 15px;
     width: 100%;
     font-size: 16px;

@@ -5,7 +5,7 @@ const Footer: React.FC = () => {
     return (
         <>
             <FooterContainer>
-                <Span>
+                <Span className='logo'>
                     <img src="/images/Logo.png" height="15px" width="15px" style={{ marginRight: "10px" }}/>
                     NextUp
                 </Span>

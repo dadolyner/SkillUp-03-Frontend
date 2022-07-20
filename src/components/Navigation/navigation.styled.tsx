@@ -19,12 +19,8 @@ export const Container = styled.nav`
     background-color: #fff;
     @media screen and (max-width: 900px) {
         display: grid;
-        &.loggedIn {
-            grid-template-columns: 33% 33% 33%;
-        }
-        &.notLoggedIn {
-            grid-template-columns: 50% 50%;
-        }
+        &.loggedIn { grid-template-columns: 50% 50%; }
+        &.notLoggedIn { grid-template-columns: 50% 50%; }
         align-items: left;
     }
 `;
@@ -38,9 +34,7 @@ export const NavigationLogo = styled.div`
     align-items: center;
     justify-content: flex-start;
     gap: 10px;
-    &:hover {
-        cursor: pointer;
-    }
+    &:hover { cursor: pointer; }
     & > h3 {
         margin: 0;
         font-size: 20px;
@@ -61,11 +55,6 @@ export const NavigationItems = styled.div<isOpened>`
         justify-content: left;
         align-items: left;
         text-align: left;
-
-        & > a:nth-child(1) { order: 2; }
-        & > a:nth-child(2) { order: 3; }
-        & > a:nth-child(3) { order: 4; }
-        & > a:nth-child(4) { order: 1; }
     }
 `;
 
