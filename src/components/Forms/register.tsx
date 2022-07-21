@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
 import { Header2, Header4, Body } from '../Typography/typography.styled';
-import { TitleContainer, Container, Avatar, FormContainer, HalfWidthContainer, HalfWidth, FullWidthContainer, Label, Input, BottomLinks, BottomLink, PrimaryColored } from './forms.styled';
+import { TitleContainer, Container, Avatar, FormContainer, HalfWidthContainer, HalfWidth, FullWidthContainer, Label, Input, BottomLinks, BottomLink, PrimaryColored, ErrorMessage } from './forms.styled';
 import { LongRoundPrimaryButton } from '../Buttons/buttons.styled';
-import axios from '../../api/axios'
+import axios from '../../api/axios';
 
 const RegisterComponent: React.FC = () => {
     const router = useRouter();
@@ -39,13 +39,18 @@ const RegisterComponent: React.FC = () => {
             }
 
             const response = await axios.post('/auth/register', userData);
-            console.log(response);
-        } catch(error) { console.log(error); }
+            const { status, data } = response;
+            
+            if(status === 200) { router.push('/'); }
+            else { setErrorValue(data.message); }
+        } catch(error: any) { 
+            if(error.response) setErrorValue(error.response.data.message); 
+            else setErrorValue(error.message);
+        }
     }
 
     return (
         <>
-
             <Container>
                 <TitleContainer>
                     <Header2><PrimaryColored>Hello!</PrimaryColored></Header2>
@@ -53,6 +58,8 @@ const RegisterComponent: React.FC = () => {
                 </TitleContainer>
                 
                 <Avatar src="/images/Avatar.png" height="64px" width="64px" />
+
+                <ErrorMessage>{errorValue}</ErrorMessage>
 
                 <FormContainer>
                     <HalfWidthContainer>

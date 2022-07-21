@@ -87,3 +87,10 @@ export const BottomLink = styled.a`
 export const PrimaryColored = styled.span`
     color: ${Primary};
 `;
+
+export const ErrorMessage = styled.div`
+    color: red;
+    font-size: 16px;
+    margin: 10px auto;
+    text-align: center;
+`;
