@@ -31,17 +31,17 @@ const Navigation: React.FC = () => {
                 { !isLoggedIn ? (
                         <>
                             { !isOpen && <Item onClick={() => { setIsOpen(false); router.push('/login')}}>Login</Item> }
-                            { !isOpen && <MiddleRoundPrimaryButton style={{ height: '40px' }} onClick={() => router.push('/register')}>Sign up</MiddleRoundPrimaryButton> }
+                            { !isOpen && <MiddleRoundPrimaryButton style={{ height: '40px' }} onClick={() => { setIsOpen(false); router.push('/register')}}>Sign up</MiddleRoundPrimaryButton> }
                         
-                            { isOpen && <MiddleRoundBlackButton style={{ width: '100%', height: '40px', marginBottom: '10px' }} onClick={() => router.push('/login')}>Login</MiddleRoundBlackButton> }
-                            { isOpen && <MiddleRoundPrimaryButton style={{ width: '100%', height: '40px', marginBottom: '20px' }} onClick={() => router.push('/register')}>Sign up</MiddleRoundPrimaryButton> }
+                            { isOpen && <MiddleRoundBlackButton style={{ width: '100%', height: '40px', marginBottom: '10px' }} onClick={() => {setIsOpen(false); router.push('/login')}}>Login</MiddleRoundBlackButton> }
+                            { isOpen && <MiddleRoundPrimaryButton style={{ width: '100%', height: '40px', marginBottom: '20px' }} onClick={() => {setIsOpen(false); router.push('/register')}}>Sign up</MiddleRoundPrimaryButton> }
                         </>
                     ) : (
                         <>
                             { !isOpen && <Item onClick={() => { setIsOpen(false); router.push('/')}}>Logout</Item> }
-                            { !isOpen && <img src="/images/Avatar.png" height="50px" width="50px" onClick={() => router.push('/profile')}/> }
+                            { !isOpen && <img src="/images/Avatar.png" height="50px" width="50px" onClick={() => {setIsOpen(false); router.push('/profile')}}/> }
 
-                            { isOpen && <MiddleRoundBlackButton style={{ width: '100%', height: '40px', marginBottom: '10px' }} onClick={() => router.push('/login')}>Logout</MiddleRoundBlackButton> }
+                            { isOpen && <MiddleRoundBlackButton style={{ width: '100%', height: '40px', marginBottom: '10px' }} onClick={() => {setIsOpen(false); router.push('/login')}}>Logout</MiddleRoundBlackButton> }
                         </>
                     ) }
                 </NavigationButtons>
