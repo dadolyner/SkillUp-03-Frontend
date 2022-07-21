@@ -1,28 +1,47 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
 import { Header2, Header4, Body } from '../Typography/typography.styled';
-import { TitleContainer, Container, Avatar, FormContainer, HalfWidthContainer, HalfWidth, FullWidthContainer, Label, Input, BottomLinks, BottomLink, PrimaryColored } from './forms.styled';
+import { TitleContainer, Container, FormContainer, FullWidthContainer, Label, Input, BottomLinks, BottomLink, PrimaryColored, ErrorMessage } from './forms.styled';
 import { LongRoundPrimaryButton } from '../Buttons/buttons.styled';
+import axios from '../../api/axios';
 
 const LoginComponent: React.FC = () => {
     const router = useRouter();
     const inputFile = React.useRef(null);
 
-    const [firstNameValue, setFirstNameValue] = React.useState('');
-    const [lastNameValue, setLastNameValue] = React.useState('');
     const [emailValue, setEmailValue] = React.useState('');
     const [passwordValue, setPasswordValue] = React.useState('');
-    const [passwordConfirmValue, setPasswordConfirmValue] = React.useState('');
 
     const [errorValue, setErrorValue] = React.useState('');
 
-    const handleFirstNameChange = (first_name: string) => setFirstNameValue(first_name);
-    const handleLastNameChange = (last_name: string) => setLastNameValue(last_name);
     const handleEmailChange = (email: string) => setEmailValue(email);
     const handlePasswordChange = (password: string) => setPasswordValue(password);
-    const handlePasswordConfirmChange = (passwordConfirm: string) => setPasswordConfirmValue(passwordConfirm);
 
-    const [showPassword, setShowPassword] = React.useState(false);
+    const loginUser = async (event: any) => {
+        event.preventDefault();
+        try {
+            if(!emailValue || !passwordValue) throw new Error('Please fill out all fields');
+
+            const userData = {
+                email: emailValue,
+                password: passwordValue
+            }
+
+            const response = await axios.post('/auth/login', userData);
+            const { status, data } = response;
+
+            if(status === 201) { 
+                localStorage.setItem('nextup_accessToken', data.accessToken);
+                localStorage.setItem('nextup_userLoggedIn', "true");
+                router.push('/'); 
+            }
+            else { setErrorValue(data.message); }
+
+        } catch(error: any) { 
+            if(error.response) setErrorValue(error.response.data.message); 
+            else setErrorValue(error.message);
+        }
+    }
 
     return (
         <>
@@ -41,10 +60,10 @@ const LoginComponent: React.FC = () => {
 
                     <FullWidthContainer>
                         <Label>Password</Label>
-                        <Input type={showPassword ? 'text' : 'password'} value={passwordValue} onChange={(e) => handlePasswordChange(e.target.value)} />
+                        <Input type={'password'} value={passwordValue} onChange={(e) => handlePasswordChange(e.target.value)} />
                     </FullWidthContainer>
 
-                    <LongRoundPrimaryButton style={{width: "100%"}}>login</LongRoundPrimaryButton>
+                    <LongRoundPrimaryButton style={{width: "100%"}} onClick={(event: any) => loginUser(event)}>login</LongRoundPrimaryButton>
 
                     <BottomLinks>
                         <Body>Don’t have an account yet?</Body>
